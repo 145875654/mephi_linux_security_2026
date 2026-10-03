@@ -1,0 +1,49 @@
+    1  groupadd students
+    2  useradd -m -u 1234 -G students user1
+    3  passwd user1
+    4  chage -M 90 user1
+    5  id user1
+    6  chage -l user1
+    7  find / -type f -perm -4000 2>/dev/null > ~/suid_files.out
+    8  cat ~/suid_files.out
+    9  ps -eo pid,euid,ruid,user,ruser,comm | awk 'NR==1 || ($2==0 && $3>=1000)'
+   10  cat ~/proc_monitor.out
+   11  ls -l ~/suid_files.out ~/proc_monitor.out
+   12  ps -eo pid,euid,ruid,user,ruser,comm | awk 'NR==1 || ($2==0 && $3>=1000)' > ~/proc_monitor.out
+   13  cat ~/proc_monitor.out
+   14  cp /usr/bin/cat /home/user1/cat
+   15  chown root:root /home/user1/cat
+   16  u+s /home/user1/cat
+   17  chmod u+s /home/user1/cat
+   18  ls -l /home/user1/cat
+   19  which setcap || dnf install libcap
+   20  cp /usr/bin/chown /home/user1/chown
+   21  setcap cap_chown+ep /home/user1/chown
+   22  getcap /home/user1/chown
+   23  rpm -q sudo || dnf install sudo
+   24  command -v date timedatectl
+   25  echo 'user1 ALL=(root) /usr/bin/date, /usr/bin/timedatectl' >> /etc/sudoers
+   26  visudo -c
+   27  echo 375194
+   28  stat /home/user1 > ~/stat.out
+   29  stat /home/user1//cat >> ~/stat.out
+   30  stat /home/user1/chown >> ~/stat.out
+   31  getcap /home/user1/chown > ~/getcap.out
+   32  ls -l ~/*.out
+   33  history > ~/history.out
+# --- команды user1 ---
+    1  passwd
+    2  exit
+    3  passwd
+    4  exit
+    5  /usr/bin/cat /etc/shadow
+    6  cd ~
+    7  ./cat /etc/shadow
+    8  cd ~
+    9  touch test.txt
+   10  /usr/bin/chown root test.txt
+   11  ./chown root test.txt
+   12  ls -l test.txt
+   13  sudo -l
+   14  sudo date -s "$(date)"
+   15  history > /tmp/history_user1.out

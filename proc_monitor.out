@@ -1,0 +1,2 @@
+    PID  EUID  RUID USER     RUSER    COMMAND
+   1408     0  1234 root     user1    passwd
